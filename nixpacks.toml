@@ -1,0 +1,27 @@
+[phases.setup]
+nixPkgs = [
+    "php84",
+    "php84Extensions.pdo_sqlite",
+    "php84Extensions.pdo_mysql",
+    "php84Extensions.pdo_pgsql",
+    "php84Extensions.bcmath",
+    "php84Extensions.mbstring",
+    "php84Extensions.gd",
+    "php84Extensions.intl",
+    "php84Packages.composer",
+    "nodejs_22"
+]
+
+[phases.install]
+cmds = [
+    "composer install --no-dev --optimize-autoloader --no-interaction",
+    "npm install"
+]
+
+[phases.build]
+cmds = [
+    "npm run build"
+]
+
+[start]
+cmd = "bash ./start.sh"

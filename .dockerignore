@@ -1,0 +1,13 @@
+.git
+.github
+node_modules
+tests
+storage/logs/*.log
+storage/framework/cache/data/*
+storage/framework/sessions/*
+storage/framework/views/*
+.env
+.phpunit.cache
+.editorconfig
+.user_uploaded
+README_DEPLOY_RAILWAY.md
