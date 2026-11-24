@@ -1,16 +1,16 @@
 <x-app-layout title="Penerimaan Barang Masuk (Inbound)">
     <div class="space-y-6">
         
-        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-slate-900 border border-slate-800 rounded-3xl p-6 shadow-xl">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white border border-slate-200/90 rounded-2xl p-6 shadow-xs">
             <div>
-                <h1 class="text-xl font-black text-white tracking-tight">Penerimaan Barang Masuk (Inbound)</h1>
-                <p class="text-xs text-slate-400 mt-1">
+                <h1 class="text-xl font-black text-slate-900 tracking-tight">Penerimaan Barang Masuk (Inbound)</h1>
+                <p class="text-xs text-slate-500 mt-1">
                     Pencatatan pasokan ban fisik dari supplier yang secara otomatis memutasi penambahan stok gudang.
                 </p>
             </div>
 
             <a href="{{ route('inbounds.create') }}"
-               class="px-5 py-2.5 rounded-2xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-xs uppercase tracking-wider shadow-lg shadow-amber-500/20 transition flex items-center gap-2">
+               class="px-5 py-2.5 rounded-2xl bg-blue-600 hover:bg-blue-700 text-white font-semibold shadow-xs text-xs uppercase tracking-wider shadow-lg shadow-blue-500/10 transition flex items-center gap-2">
                 <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
                 </svg>
@@ -18,10 +18,10 @@
             </a>
         </div>
 
-        <div class="bg-slate-900 border border-slate-800 rounded-3xl overflow-hidden shadow-xl">
+        <div class="bg-white border border-slate-200/90 rounded-2xl overflow-hidden shadow-xs">
             <div class="overflow-x-auto">
                 <table class="w-full text-left text-xs">
-                    <thead class="bg-slate-950/80 border-b border-slate-800 text-[10px] uppercase font-bold text-slate-400 tracking-wider">
+                    <thead class="bg-slate-50/90 border-b border-slate-200 text-[10px] uppercase font-bold text-slate-500 tracking-wider">
                         <tr>
                             <th class="py-4 px-6">No Referensi Inbound</th>
                             <th class="py-4 px-6">Tanggal Terima</th>
@@ -32,21 +32,21 @@
                             <th class="py-4 px-6 text-center">Aksi</th>
                         </tr>
                     </thead>
-                    <tbody class="divide-y divide-slate-800 text-slate-300">
+                    <tbody class="divide-y divide-slate-100 text-slate-700">
                         @forelse($inbounds as $inb)
-                            <tr class="hover:bg-slate-800/40 transition">
+                            <tr class="hover:bg-slate-50/80 transition">
                                 <td class="py-4 px-6">
                                     <span class="font-mono font-bold text-blue-400 text-sm block">{{ $inb->reference_number }}</span>
                                 </td>
-                                <td class="py-4 px-6 font-medium text-white">
+                                <td class="py-4 px-6 font-medium text-slate-900">
                                     {{ $inb->received_date->format('d/m/Y') }}
                                 </td>
                                 <td class="py-4 px-6">
-                                    <div class="font-bold text-white">{{ $inb->supplier ? $inb->supplier->name : '-' }}</div>
-                                    <span class="text-[10px] text-slate-400">No Faktur/SJ: {{ $inb->supplier_invoice_number ?: '-' }}</span>
+                                    <div class="font-bold text-slate-900">{{ $inb->supplier ? $inb->supplier->name : '-' }}</div>
+                                    <span class="text-[10px] text-slate-500">No Faktur/SJ: {{ $inb->supplier_invoice_number ?: '-' }}</span>
                                 </td>
                                 <td class="py-4 px-6">
-                                    <span class="px-2.5 py-1 rounded-full bg-slate-800 text-slate-200 font-bold text-xs">
+                                    <span class="px-2.5 py-1 rounded-full bg-slate-800 text-slate-800 font-bold text-xs">
                                         {{ $inb->items->sum('quantity') }} unit ({{ $inb->items->count() }} item)
                                     </span>
                                 </td>
@@ -54,11 +54,11 @@
                                     {{ $inb->formatted_total_amount }}
                                 </td>
                                 <td class="py-4 px-6">
-                                    <span class="font-semibold text-slate-300">{{ $inb->user ? $inb->user->name : '-' }}</span>
+                                    <span class="font-semibold text-slate-700">{{ $inb->user ? $inb->user->name : '-' }}</span>
                                 </td>
                                 <td class="py-4 px-6 text-center">
                                     <a href="{{ route('inbounds.show', $inb->id) }}"
-                                       class="px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-amber-400 font-bold text-xs transition inline-flex items-center gap-1 border border-slate-700">
+                                       class="px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-amber-400 font-bold text-xs transition inline-flex items-center gap-1 border border-slate-200">
                                         <span>Rincian</span>
                                         <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
@@ -77,7 +77,7 @@
                 </table>
             </div>
 
-            <div class="p-4 border-t border-slate-800">
+            <div class="p-4 border-t border-slate-200">
                 {{ $inbounds->links() }}
             </div>
         </div>

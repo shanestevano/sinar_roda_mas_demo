@@ -2,11 +2,11 @@
     <div class="space-y-6">
         
         <!-- Header & Date Filter Bar -->
-        <div class="bg-slate-900 border border-slate-800 rounded-3xl p-6 shadow-xl space-y-4">
+        <div class="bg-white border border-slate-200/90 rounded-2xl p-6 shadow-xs space-y-4">
             <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                 <div>
-                    <h1 class="text-xl font-black text-white tracking-tight">Laporan Penjualan & Laba Rugi (Owner)</h1>
-                    <p class="text-xs text-slate-400 mt-1">
+                    <h1 class="text-xl font-black text-slate-900 tracking-tight">Laporan Penjualan & Laba Rugi (Owner)</h1>
+                    <p class="text-xs text-slate-500 mt-1">
                         Analisis pendapatan kotor, beban modal ban (HPP), serta marjin laba riil toko.
                     </p>
                 </div>
@@ -24,22 +24,22 @@
             </div>
 
             <!-- Filter Controls -->
-            <form method="GET" action="{{ route('reports.sales') }}" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3 pt-4 border-t border-slate-800 text-xs">
+            <form method="GET" action="{{ route('reports.sales') }}" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3 pt-4 border-t border-slate-200 text-xs">
                 <div>
-                    <label class="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Dari Tanggal</label>
+                    <label class="block text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-1">Dari Tanggal</label>
                     <input type="date" name="start_date" value="{{ $startDate }}"
-                           class="w-full px-3 py-2 bg-slate-950 border border-slate-700 rounded-xl text-white">
+                           class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-slate-900">
                 </div>
 
                 <div>
-                    <label class="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Sampai Tanggal</label>
+                    <label class="block text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-1">Sampai Tanggal</label>
                     <input type="date" name="end_date" value="{{ $endDate }}"
-                           class="w-full px-3 py-2 bg-slate-950 border border-slate-700 rounded-xl text-white">
+                           class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-slate-900">
                 </div>
 
                 <div>
-                    <label class="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Metode Bayar</label>
-                    <select name="payment_method" class="w-full px-3 py-2 bg-slate-950 border border-slate-700 rounded-xl text-white">
+                    <label class="block text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-1">Metode Bayar</label>
+                    <select name="payment_method" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-slate-900">
                         <option value="">Semua Metode</option>
                         <option value="cash" {{ $paymentMethod === 'cash' ? 'selected' : '' }}>Tunai (Cash)</option>
                         <option value="transfer" {{ $paymentMethod === 'transfer' ? 'selected' : '' }}>Transfer Bank</option>
@@ -49,8 +49,8 @@
                 </div>
 
                 <div>
-                    <label class="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Kasir</label>
-                    <select name="cashier_id" class="w-full px-3 py-2 bg-slate-950 border border-slate-700 rounded-xl text-white">
+                    <label class="block text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-1">Kasir</label>
+                    <select name="cashier_id" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-slate-900">
                         <option value="">Semua Kasir</option>
                         @foreach($cashiers as $c)
                             <option value="{{ $c->id }}" {{ $cashierId == $c->id ? 'selected' : '' }}>{{ $c->name }}</option>
@@ -59,10 +59,10 @@
                 </div>
 
                 <div class="flex items-end gap-2">
-                    <button type="submit" class="flex-1 py-2 px-4 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold rounded-xl transition">
+                    <button type="submit" class="flex-1 py-2 px-4 bg-blue-600 hover:bg-blue-700 text-white font-semibold shadow-xs rounded-xl transition">
                         Terapkan
                     </button>
-                    <a href="{{ route('reports.sales') }}" class="py-2 px-3 bg-slate-800 text-slate-400 hover:text-white rounded-xl">
+                    <a href="{{ route('reports.sales') }}" class="py-2 px-3 bg-slate-800 text-slate-500 hover:text-white rounded-xl">
                         Reset
                     </a>
                 </div>
@@ -71,44 +71,44 @@
 
         <!-- Summary KPI Cards -->
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            <div class="bg-slate-900 border border-slate-800 rounded-3xl p-5 shadow-xl">
-                <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider block mb-1">Total Pendapatan (Omset)</span>
-                <div class="text-2xl font-black text-white">
+            <div class="bg-white border border-slate-200/90 rounded-2xl p-5 shadow-xs">
+                <span class="text-[10px] font-bold text-slate-500 uppercase tracking-wider block mb-1">Total Pendapatan (Omset)</span>
+                <div class="text-2xl font-bold text-slate-900">
                     Rp {{ number_format($totalRevenue, 0, ',', '.') }}
                 </div>
-                <span class="text-[11px] text-slate-400 mt-1 block">{{ $totalCompletedCount }} transaksi sukses</span>
+                <span class="text-[11px] text-slate-500 mt-1 block">{{ $totalCompletedCount }} transaksi sukses</span>
             </div>
 
-            <div class="bg-slate-900 border border-slate-800 rounded-3xl p-5 shadow-xl">
-                <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider block mb-1">Total Biaya Modal (HPP)</span>
-                <div class="text-2xl font-black text-slate-300">
+            <div class="bg-white border border-slate-200/90 rounded-2xl p-5 shadow-xs">
+                <span class="text-[10px] font-bold text-slate-500 uppercase tracking-wider block mb-1">Total Biaya Modal (HPP)</span>
+                <div class="text-2xl font-black text-slate-700">
                     Rp {{ number_format($totalCost, 0, ',', '.') }}
                 </div>
-                <span class="text-[11px] text-slate-400 mt-1 block">Beban pokok perolehan ban</span>
+                <span class="text-[11px] text-slate-500 mt-1 block">Beban pokok perolehan ban</span>
             </div>
 
-            <div class="bg-slate-900 border border-slate-800 rounded-3xl p-5 shadow-xl">
-                <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider block mb-1">Laba Kotor (Gross Profit)</span>
+            <div class="bg-white border border-slate-200/90 rounded-2xl p-5 shadow-xs">
+                <span class="text-[10px] font-bold text-slate-500 uppercase tracking-wider block mb-1">Laba Kotor (Gross Profit)</span>
                 <div class="text-2xl font-black text-emerald-400">
                     Rp {{ number_format($grossProfit, 0, ',', '.') }}
                 </div>
                 <span class="text-[11px] text-emerald-300 mt-1 block">Omset dikurangi HPP</span>
             </div>
 
-            <div class="bg-slate-900 border border-slate-800 rounded-3xl p-5 shadow-xl">
-                <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider block mb-1">Marjin Laba Kotor (%)</span>
+            <div class="bg-white border border-slate-200/90 rounded-2xl p-5 shadow-xs">
+                <span class="text-[10px] font-bold text-slate-500 uppercase tracking-wider block mb-1">Marjin Laba Kotor (%)</span>
                 <div class="text-2xl font-black text-purple-400">
                     {{ number_format($profitMargin, 1) }}%
                 </div>
-                <span class="text-[11px] text-slate-400 mt-1 block">Rasio keuntungan penjualan</span>
+                <span class="text-[11px] text-slate-500 mt-1 block">Rasio keuntungan penjualan</span>
             </div>
         </div>
 
         <!-- Sales Data Table -->
-        <div class="bg-slate-900 border border-slate-800 rounded-3xl overflow-hidden shadow-xl">
+        <div class="bg-white border border-slate-200/90 rounded-2xl overflow-hidden shadow-xs">
             <div class="overflow-x-auto">
                 <table class="w-full text-left text-xs">
-                    <thead class="bg-slate-950/80 border-b border-slate-800 text-[10px] uppercase font-bold text-slate-400 tracking-wider">
+                    <thead class="bg-slate-50/90 border-b border-slate-200 text-[10px] uppercase font-bold text-slate-500 tracking-wider">
                         <tr>
                             <th class="py-4 px-6">No Faktur & Tanggal</th>
                             <th class="py-4 px-6">Kasir</th>
@@ -120,32 +120,32 @@
                             <th class="py-4 px-6 text-center">Status</th>
                         </tr>
                     </thead>
-                    <tbody class="divide-y divide-slate-800 text-slate-300">
+                    <tbody class="divide-y divide-slate-100 text-slate-700">
                         @forelse($transactions as $tx)
-                            <tr class="hover:bg-slate-800/40 transition {{ $tx->isVoided() ? 'opacity-50' : '' }}">
+                            <tr class="hover:bg-slate-50/80 transition {{ $tx->isVoided() ? 'opacity-50' : '' }}">
                                 <td class="py-4 px-6">
                                     <a href="{{ route('pos.receipt', $tx->id) }}" target="_blank"
-                                       class="font-mono font-bold text-amber-400 hover:underline block text-xs">
+                                       class="font-mono font-bold text-blue-600 hover:underline block text-xs">
                                         {{ $tx->invoice_number }}
                                     </a>
                                     <span class="text-[10px] text-slate-500">{{ $tx->created_at->format('d/m/Y H:i') }}</span>
                                 </td>
                                 <td class="py-4 px-6">
-                                    <span class="font-semibold text-white">{{ $tx->user ? $tx->user->name : '-' }}</span>
+                                    <span class="font-semibold text-slate-900">{{ $tx->user ? $tx->user->name : '-' }}</span>
                                 </td>
                                 <td class="py-4 px-6">
                                     <div class="text-white">{{ $tx->customer_name }}</div>
                                     @if($tx->vehicle_plate)
-                                        <span class="text-[10px] text-slate-400 font-mono">{{ $tx->vehicle_plate }}</span>
+                                        <span class="text-[10px] text-slate-500 font-mono">{{ $tx->vehicle_plate }}</span>
                                     @endif
                                 </td>
-                                <td class="py-4 px-6 font-semibold uppercase text-[10px] text-slate-400">
+                                <td class="py-4 px-6 font-semibold uppercase text-[10px] text-slate-500">
                                     {{ $tx->payment_method }}
                                 </td>
-                                <td class="py-4 px-6 text-right text-slate-400 font-medium">
+                                <td class="py-4 px-6 text-right text-slate-500 font-medium">
                                     Rp {{ number_format($tx->total_cost, 0, ',', '.') }}
                                 </td>
-                                <td class="py-4 px-6 text-right font-bold text-white">
+                                <td class="py-4 px-6 text-right font-bold text-slate-900">
                                     {{ $tx->formatted_grand_total }}
                                 </td>
                                 <td class="py-4 px-6 text-right font-black {{ $tx->isVoided() ? 'text-slate-500' : 'text-emerald-400' }}">
@@ -175,7 +175,7 @@
                 </table>
             </div>
 
-            <div class="p-4 border-t border-slate-800">
+            <div class="p-4 border-t border-slate-200">
                 {{ $transactions->links() }}
             </div>
         </div>

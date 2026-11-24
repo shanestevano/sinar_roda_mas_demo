@@ -1,10 +1,10 @@
 <x-app-layout title="Rekap Shift Kasir">
     <div x-data="shiftApp()" class="space-y-6">
         
-        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-slate-900 border border-slate-800 rounded-3xl p-6 shadow-xl">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white border border-slate-200/90 rounded-2xl p-6 shadow-xs">
             <div>
-                <h1 class="text-xl font-black text-white tracking-tight">Rekapitulasi Shift Kasir</h1>
-                <p class="text-xs text-slate-400 mt-1">
+                <h1 class="text-xl font-black text-slate-900 tracking-tight">Rekapitulasi Shift Kasir</h1>
+                <p class="text-xs text-slate-500 mt-1">
                     Pencatatan kas modal awal, total omset penjualan shift, dan rekonsiliasi kas fisik harian.
                 </p>
             </div>
@@ -41,30 +41,30 @@
 
                 <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 text-xs">
                     <div>
-                        <span class="text-slate-400 block text-[10px] uppercase font-bold">Waktu Mulai:</span>
-                        <strong class="text-white text-sm">{{ $activeShift->opened_at->format('d/m/Y H:i') }}</strong>
+                        <span class="text-slate-500 block text-[10px] uppercase font-bold">Waktu Mulai:</span>
+                        <strong class="text-slate-900 text-sm">{{ $activeShift->opened_at->format('d/m/Y H:i') }}</strong>
                     </div>
                     <div>
-                        <span class="text-slate-400 block text-[10px] uppercase font-bold">Modal Awal Laci:</span>
-                        <strong class="text-white text-sm">Rp {{ number_format($activeShift->starting_cash, 0, ',', '.') }}</strong>
+                        <span class="text-slate-500 block text-[10px] uppercase font-bold">Modal Awal Laci:</span>
+                        <strong class="text-slate-900 text-sm">Rp {{ number_format($activeShift->starting_cash, 0, ',', '.') }}</strong>
                     </div>
                     <div>
-                        <span class="text-slate-400 block text-[10px] uppercase font-bold">Total Penjualan Tunai:</span>
+                        <span class="text-slate-500 block text-[10px] uppercase font-bold">Total Penjualan Tunai:</span>
                         <strong class="text-emerald-400 text-sm font-black">Rp {{ number_format($activeShift->total_cash_sales, 0, ',', '.') }}</strong>
                     </div>
                     <div>
-                        <span class="text-slate-400 block text-[10px] uppercase font-bold">Total Transaksi:</span>
-                        <strong class="text-white text-sm">{{ $activeShift->total_transactions }} nota</strong>
+                        <span class="text-slate-500 block text-[10px] uppercase font-bold">Total Transaksi:</span>
+                        <strong class="text-slate-900 text-sm">{{ $activeShift->total_transactions }} nota</strong>
                     </div>
                 </div>
             </div>
         @endif
 
         <!-- Shifts History Table -->
-        <div class="bg-slate-900 border border-slate-800 rounded-3xl overflow-hidden shadow-xl">
+        <div class="bg-white border border-slate-200/90 rounded-2xl overflow-hidden shadow-xs">
             <div class="overflow-x-auto">
                 <table class="w-full text-left text-xs">
-                    <thead class="bg-slate-950/80 border-b border-slate-800 text-[10px] uppercase font-bold text-slate-400 tracking-wider">
+                    <thead class="bg-slate-50/90 border-b border-slate-200 text-[10px] uppercase font-bold text-slate-500 tracking-wider">
                         <tr>
                             <th class="py-4 px-6">Tanggal & Kasir</th>
                             <th class="py-4 px-6">Jam Buka / Tutup</th>
@@ -76,26 +76,26 @@
                             <th class="py-4 px-6 text-center">Status</th>
                         </tr>
                     </thead>
-                    <tbody class="divide-y divide-slate-800 text-slate-300">
+                    <tbody class="divide-y divide-slate-100 text-slate-700">
                         @forelse($shifts as $s)
-                            <tr class="hover:bg-slate-800/40 transition">
+                            <tr class="hover:bg-slate-50/80 transition">
                                 <td class="py-4 px-6">
-                                    <div class="font-bold text-white">{{ $s->user ? $s->user->name : '-' }}</div>
+                                    <div class="font-bold text-slate-900">{{ $s->user ? $s->user->name : '-' }}</div>
                                     <span class="text-[10px] text-slate-500">{{ $s->shift_date->format('d/m/Y') }}</span>
                                 </td>
-                                <td class="py-4 px-6 font-mono text-[11px] text-slate-400">
+                                <td class="py-4 px-6 font-mono text-[11px] text-slate-500">
                                     {{ $s->opened_at->format('H:i') }} - {{ $s->closed_at ? $s->closed_at->format('H:i') : 'Aktif' }}
                                 </td>
-                                <td class="py-4 px-6 text-right font-medium text-slate-300">
+                                <td class="py-4 px-6 text-right font-medium text-slate-700">
                                     Rp {{ number_format($s->starting_cash, 0, ',', '.') }}
                                 </td>
                                 <td class="py-4 px-6 text-right font-bold text-emerald-400">
                                     Rp {{ number_format($s->total_cash_sales, 0, ',', '.') }}
                                 </td>
-                                <td class="py-4 px-6 text-right font-bold text-white">
+                                <td class="py-4 px-6 text-right font-bold text-slate-900">
                                     Rp {{ number_format($s->expected_cash, 0, ',', '.') }}
                                 </td>
-                                <td class="py-4 px-6 text-right font-bold text-white">
+                                <td class="py-4 px-6 text-right font-bold text-slate-900">
                                     {{ $s->actual_cash !== null ? 'Rp ' . number_format($s->actual_cash, 0, ',', '.') : '-' }}
                                 </td>
                                 <td class="py-4 px-6 text-center">
@@ -114,7 +114,7 @@
                                             Aktif
                                         </span>
                                     @else
-                                        <span class="px-2.5 py-1 rounded-full text-[10px] font-bold uppercase bg-slate-800 text-slate-400">
+                                        <span class="px-2.5 py-1 rounded-full text-[10px] font-bold uppercase bg-slate-800 text-slate-500">
                                             Selesai
                                         </span>
                                     @endif
@@ -131,31 +131,31 @@
                 </table>
             </div>
 
-            <div class="p-4 border-t border-slate-800">
+            <div class="p-4 border-t border-slate-200">
                 {{ $shifts->links() }}
             </div>
         </div>
 
         <!-- Open Shift Modal -->
         <div x-show="startModalOpen" x-cloak
-             class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-sm">
-            <div class="bg-slate-900 border border-slate-700 rounded-3xl p-6 sm:p-8 max-w-sm w-full shadow-2xl space-y-4"
+             class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-white/50 backdrop-blur-xs">
+            <div class="bg-white border border-slate-200 rounded-3xl shadow-2xl p-6 sm:p-8 max-w-sm w-full shadow-2xl space-y-4"
                  @click.away="startModalOpen = false">
-                <h3 class="text-base font-black text-white">Buka Shift Kasir Baru</h3>
-                <p class="text-xs text-slate-400">Masukkan jumlah uang modal awal di laci kasir.</p>
+                <h3 class="text-base font-bold text-slate-900">Buka Shift Kasir Baru</h3>
+                <p class="text-xs text-slate-500">Masukkan jumlah uang modal awal di laci kasir.</p>
 
                 <form method="POST" action="{{ route('shifts.start') }}" class="space-y-4">
                     @csrf
                     <div>
-                        <label class="block text-xs font-semibold text-slate-300 mb-1">Modal Awal Tunai (Rp) *</label>
+                        <label class="block text-xs font-semibold text-slate-700 mb-1">Modal Awal Tunai (Rp) *</label>
                         <input type="number" name="starting_cash" value="500000" required min="0"
-                               class="w-full px-4 py-2.5 bg-slate-950 border border-slate-700 rounded-xl text-white font-bold text-base text-right focus:ring-1 focus:ring-amber-500">
+                               class="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-slate-900 font-bold text-base text-right focus:ring-1 focus:ring-blue-500 focus:border-blue-500">
                     </div>
 
                     <div>
-                        <label class="block text-xs font-semibold text-slate-300 mb-1">Catatan Shift</label>
+                        <label class="block text-xs font-semibold text-slate-700 mb-1">Catatan Shift</label>
                         <input type="text" name="notes" placeholder="Contoh: Shift Pagi Kasir Toko"
-                               class="w-full px-4 py-2 bg-slate-950 border border-slate-700 rounded-xl text-white text-xs">
+                               class="w-full px-4 py-2 bg-slate-50 border border-slate-200 rounded-xl text-slate-900 text-xs">
                     </div>
 
                     <div class="flex items-center gap-3 pt-2">
@@ -164,7 +164,7 @@
                             Mulai Bertugas
                         </button>
                         <button type="button" @click="startModalOpen = false"
-                                class="px-4 py-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-white font-bold text-xs">
+                                class="px-4 py-3 rounded-xl bg-slate-50 hover:bg-slate-100 text-slate-700 border border-slate-200 font-bold text-xs">
                             Batal
                         </button>
                     </div>
@@ -174,24 +174,24 @@
 
         <!-- Close Shift Modal -->
         <div x-show="closeModalOpen" x-cloak
-             class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-sm">
-            <div class="bg-slate-900 border border-slate-700 rounded-3xl p-6 sm:p-8 max-w-sm w-full shadow-2xl space-y-4"
+             class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-white/50 backdrop-blur-xs">
+            <div class="bg-white border border-slate-200 rounded-3xl shadow-2xl p-6 sm:p-8 max-w-sm w-full shadow-2xl space-y-4"
                  @click.away="closeModalOpen = false">
-                <h3 class="text-base font-black text-white">Tutup Shift Kasir & Rekonsiliasi</h3>
-                <p class="text-xs text-slate-400">Hitung total uang fisik di laci kasir untuk mengecek selisih.</p>
+                <h3 class="text-base font-bold text-slate-900">Tutup Shift Kasir & Rekonsiliasi</h3>
+                <p class="text-xs text-slate-500">Hitung total uang fisik di laci kasir untuk mengecek selisih.</p>
 
                 <form :action="'/shifts/' + targetShiftId + '/close'" method="POST" class="space-y-4">
                     @csrf
-                    <div class="p-3 rounded-2xl bg-slate-950 border border-slate-800 text-xs flex justify-between">
-                        <span class="text-slate-400">Ekspektasi Kas Laci:</span>
-                        <strong class="text-white" x-text="formatRupiah(targetExpected)"></strong>
+                    <div class="p-3 rounded-2xl bg-slate-50 border border-slate-200 text-xs flex justify-between">
+                        <span class="text-slate-500">Ekspektasi Kas Laci:</span>
+                        <strong class="text-slate-900" x-text="formatRupiah(targetExpected)"></strong>
                     </div>
 
                     <div>
-                        <label class="block text-xs font-semibold text-slate-300 mb-1">Uang Kas Fisik Riil (Rp) *</label>
+                        <label class="block text-xs font-semibold text-slate-700 mb-1">Uang Kas Fisik Riil (Rp) *</label>
                         <input type="number" name="actual_cash" x-model.number="actualCash" required min="0"
-                               class="w-full px-4 py-2.5 bg-slate-950 border border-slate-700 rounded-xl text-white font-bold text-base text-right focus:ring-1 focus:ring-amber-500">
-                        <div class="text-[11px] text-slate-400 mt-1 flex justify-between">
+                               class="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-slate-900 font-bold text-base text-right focus:ring-1 focus:ring-blue-500 focus:border-blue-500">
+                        <div class="text-[11px] text-slate-500 mt-1 flex justify-between">
                             <span>Selisih:</span>
                             <span :class="(actualCash - targetExpected) < 0 ? 'text-rose-400 font-bold' : 'text-emerald-400 font-bold'"
                                   x-text="formatRupiah(actualCash - targetExpected)"></span>
@@ -199,9 +199,9 @@
                     </div>
 
                     <div>
-                        <label class="block text-xs font-semibold text-slate-300 mb-1">Catatan Penutupan</label>
+                        <label class="block text-xs font-semibold text-slate-700 mb-1">Catatan Penutupan</label>
                         <input type="text" name="notes" placeholder="Contoh: Kas fisik cocok tanpa selisih"
-                               class="w-full px-4 py-2 bg-slate-950 border border-slate-700 rounded-xl text-white text-xs">
+                               class="w-full px-4 py-2 bg-slate-50 border border-slate-200 rounded-xl text-slate-900 text-xs">
                     </div>
 
                     <div class="flex items-center gap-3 pt-2">
@@ -210,7 +210,7 @@
                             Simpan & Tutup Shift
                         </button>
                         <button type="button" @click="closeModalOpen = false"
-                                class="px-4 py-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-white font-bold text-xs">
+                                class="px-4 py-3 rounded-xl bg-slate-50 hover:bg-slate-100 text-slate-700 border border-slate-200 font-bold text-xs">
                             Batal
                         </button>
                     </div>

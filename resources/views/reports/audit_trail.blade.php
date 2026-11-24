@@ -1,21 +1,21 @@
 <x-app-layout title="Audit Trail (Log Aktivitas)">
     <div class="space-y-6">
         
-        <div class="bg-slate-900 border border-slate-800 rounded-3xl p-6 shadow-xl space-y-4">
+        <div class="bg-white border border-slate-200/90 rounded-2xl p-6 shadow-xs space-y-4">
             <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                 <div>
-                    <h1 class="text-xl font-black text-white tracking-tight">Audit Trail & Log Aktivitas Sistem</h1>
-                    <p class="text-xs text-slate-400 mt-1">
+                    <h1 class="text-xl font-black text-slate-900 tracking-tight">Audit Trail & Log Aktivitas Sistem</h1>
+                    <p class="text-xs text-slate-500 mt-1">
                         Catatan kronologis tindakan setiap pengguna: waktu, pelaku, alamat IP, aksi sistem, dan data perubahan.
                     </p>
                 </div>
             </div>
 
             <!-- Filter Controls -->
-            <form method="GET" action="{{ route('reports.audit-trail') }}" class="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-4 border-t border-slate-800 text-xs">
+            <form method="GET" action="{{ route('reports.audit-trail') }}" class="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-4 border-t border-slate-200 text-xs">
                 <div>
-                    <label class="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Aksi Sistem</label>
-                    <select name="action" class="w-full px-3 py-2 bg-slate-950 border border-slate-700 rounded-xl text-white">
+                    <label class="block text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-1">Aksi Sistem</label>
+                    <select name="action" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-slate-900">
                         <option value="">Semua Aksi</option>
                         @foreach($actions as $act)
                             <option value="{{ $act }}" {{ request('action') === $act ? 'selected' : '' }}>{{ $act }}</option>
@@ -24,8 +24,8 @@
                 </div>
 
                 <div>
-                    <label class="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Pengguna (User)</label>
-                    <select name="user_id" class="w-full px-3 py-2 bg-slate-950 border border-slate-700 rounded-xl text-white">
+                    <label class="block text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-1">Pengguna (User)</label>
+                    <select name="user_id" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-slate-900">
                         <option value="">Semua Pengguna</option>
                         @foreach($users as $u)
                             <option value="{{ $u->id }}" {{ request('user_id') == $u->id ? 'selected' : '' }}>{{ $u->name }} ({{ strtoupper($u->role) }})</option>
@@ -34,11 +34,11 @@
                 </div>
 
                 <div class="flex items-end gap-2">
-                    <button type="submit" class="flex-1 py-2 px-4 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold rounded-xl transition">
+                    <button type="submit" class="flex-1 py-2 px-4 bg-blue-600 hover:bg-blue-700 text-white font-semibold shadow-xs rounded-xl transition">
                         Filter Log
                     </button>
                     @if(request()->hasAny(['action', 'user_id']))
-                        <a href="{{ route('reports.audit-trail') }}" class="py-2 px-3 bg-slate-800 text-slate-400 hover:text-white rounded-xl">
+                        <a href="{{ route('reports.audit-trail') }}" class="py-2 px-3 bg-slate-800 text-slate-500 hover:text-white rounded-xl">
                             Reset
                         </a>
                     @endif
@@ -47,10 +47,10 @@
         </div>
 
         <!-- Activity Logs Table -->
-        <div class="bg-slate-900 border border-slate-800 rounded-3xl overflow-hidden shadow-xl">
+        <div class="bg-white border border-slate-200/90 rounded-2xl overflow-hidden shadow-xs">
             <div class="overflow-x-auto">
                 <table class="w-full text-left text-xs">
-                    <thead class="bg-slate-950/80 border-b border-slate-800 text-[10px] uppercase font-bold text-slate-400 tracking-wider">
+                    <thead class="bg-slate-50/90 border-b border-slate-200 text-[10px] uppercase font-bold text-slate-500 tracking-wider">
                         <tr>
                             <th class="py-4 px-6">Waktu Kejadian</th>
                             <th class="py-4 px-6">Pelaku (Pengguna)</th>
@@ -59,16 +59,16 @@
                             <th class="py-4 px-6">IP Address</th>
                         </tr>
                     </thead>
-                    <tbody class="divide-y divide-slate-800 text-slate-300">
+                    <tbody class="divide-y divide-slate-100 text-slate-700">
                         @forelse($logs as $log)
-                            <tr class="hover:bg-slate-800/40 transition">
-                                <td class="py-4 px-6 font-mono text-slate-400 text-[11px] whitespace-nowrap">
+                            <tr class="hover:bg-slate-50/80 transition">
+                                <td class="py-4 px-6 font-mono text-slate-500 text-[11px] whitespace-nowrap">
                                     {{ $log->created_at->format('d/m/Y H:i:s') }}
                                     <span class="text-[10px] text-slate-500 block">({{ $log->created_at->diffForHumans() }})</span>
                                 </td>
                                 <td class="py-4 px-6 whitespace-nowrap">
                                     @if($log->user)
-                                        <div class="font-bold text-white">{{ $log->user->name }}</div>
+                                        <div class="font-bold text-slate-900">{{ $log->user->name }}</div>
                                         <span class="inline-block px-1.5 py-0.5 rounded text-[9px] font-bold uppercase
                                             {{ $log->user->role === 'admin' ? 'bg-rose-500/20 text-rose-300' : '' }}
                                             {{ $log->user->role === 'owner' ? 'bg-purple-500/20 text-purple-300' : '' }}
@@ -81,14 +81,14 @@
                                     @endif
                                 </td>
                                 <td class="py-4 px-6 whitespace-nowrap">
-                                    <span class="px-2.5 py-1 rounded-full font-mono text-[10px] font-bold bg-slate-800 text-amber-300 border border-slate-700">
+                                    <span class="px-2.5 py-1 rounded-full font-mono text-[10px] font-bold bg-slate-800 text-amber-300 border border-slate-200">
                                         {{ $log->action }}
                                     </span>
                                 </td>
                                 <td class="py-4 px-6">
-                                    <div class="text-slate-200 text-xs">{{ $log->description }}</div>
+                                    <div class="text-slate-800 text-xs">{{ $log->description }}</div>
                                     @if($log->properties)
-                                        <pre class="mt-1 p-2 rounded-xl bg-slate-950 border border-slate-800 font-mono text-[10px] text-slate-400 overflow-x-auto">{{ json_encode($log->properties, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES) }}</pre>
+                                        <pre class="mt-1 p-2 rounded-xl bg-slate-50 border border-slate-200 font-mono text-[10px] text-slate-500 overflow-x-auto">{{ json_encode($log->properties, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES) }}</pre>
                                     @endif
                                 </td>
                                 <td class="py-4 px-6 font-mono text-slate-500 text-[11px] whitespace-nowrap">
@@ -106,7 +106,7 @@
                 </table>
             </div>
 
-            <div class="p-4 border-t border-slate-800">
+            <div class="p-4 border-t border-slate-200">
                 {{ $logs->links() }}
             </div>
         </div>

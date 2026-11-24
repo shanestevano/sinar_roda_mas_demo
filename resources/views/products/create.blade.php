@@ -3,51 +3,51 @@
         
         <div class="flex items-center justify-between">
             <div>
-                <a href="{{ route('products.index') }}" class="text-xs text-amber-400 hover:underline flex items-center gap-1 mb-1">
+                <a href="{{ route('products.index') }}" class="text-xs text-blue-600 hover:underline flex items-center gap-1 mb-1">
                     &larr; Kembali ke Daftar Ban
                 </a>
-                <h1 class="text-xl font-black text-white tracking-tight">Tambah Master Data Ban Baru</h1>
+                <h1 class="text-xl font-black text-slate-900 tracking-tight">Tambah Master Data Ban Baru</h1>
             </div>
         </div>
 
-        <form method="POST" action="{{ route('products.store') }}" class="bg-slate-900 border border-slate-800 rounded-3xl p-6 sm:p-8 shadow-xl space-y-6">
+        <form method="POST" action="{{ route('products.store') }}" class="bg-white border border-slate-200/90 rounded-2xl shadow-xs p-6 sm:p-8 shadow-xl space-y-6">
             @csrf
 
             <!-- Section 1: Identitas & Barcode -->
             <div>
-                <h2 class="text-xs font-bold text-slate-300 uppercase tracking-wider mb-4 border-b border-slate-800 pb-2">
+                <h2 class="text-xs font-bold text-slate-700 uppercase tracking-wider mb-4 border-b border-slate-200 pb-2">
                     1. Identitas Ban & Kode Barcode
                 </h2>
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                        <label class="block text-xs font-semibold text-slate-300 mb-1">Kode SKU Ban *</label>
+                        <label class="block text-xs font-semibold text-slate-700 mb-1">Kode SKU Ban *</label>
                         <input type="text" name="sku" x-model="sku" required
                                placeholder="Contoh: TIR-BS-185-65-R15"
-                               class="w-full px-4 py-2.5 bg-slate-950 border border-slate-700 rounded-xl text-white text-xs font-mono uppercase focus:ring-1 focus:ring-amber-500">
-                        <span class="text-[10px] text-slate-400">Kode unik identifikasi stok toko</span>
+                               class="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-slate-900 text-xs font-mono uppercase focus:ring-1 focus:ring-blue-500 focus:border-blue-500">
+                        <span class="text-[10px] text-slate-500">Kode unik identifikasi stok toko</span>
                     </div>
 
                     <div>
-                        <label class="block text-xs font-semibold text-slate-300 mb-1">Nomor Barcode Fisik</label>
+                        <label class="block text-xs font-semibold text-slate-700 mb-1">Nomor Barcode Fisik</label>
                         <input type="text" name="barcode" value="{{ old('barcode') }}"
                                placeholder="Scan atau kosongkan (otomatis di-generate)"
-                               class="w-full px-4 py-2.5 bg-slate-950 border border-slate-700 rounded-xl text-white text-xs font-mono focus:ring-1 focus:ring-amber-500">
-                        <span class="text-[10px] text-slate-400">Barcode stiker pada fisik ban untuk scanner kasir</span>
+                               class="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-slate-900 text-xs font-mono focus:ring-1 focus:ring-blue-500 focus:border-blue-500">
+                        <span class="text-[10px] text-slate-500">Barcode stiker pada fisik ban untuk scanner kasir</span>
                     </div>
                 </div>
             </div>
 
             <!-- Section 2: Spesifikasi Teknis -->
             <div>
-                <h2 class="text-xs font-bold text-slate-300 uppercase tracking-wider mb-4 border-b border-slate-800 pb-2">
+                <h2 class="text-xs font-bold text-slate-700 uppercase tracking-wider mb-4 border-b border-slate-200 pb-2">
                     2. Spesifikasi Teknis & Dimensi
                 </h2>
                 <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
                     <div>
-                        <label class="block text-xs font-semibold text-slate-300 mb-1">Merk / Brand Ban *</label>
+                        <label class="block text-xs font-semibold text-slate-700 mb-1">Merk / Brand Ban *</label>
                         <input type="text" name="brand" x-model="brand" @input="updateSku()" list="brandList" required
                                placeholder="Bridgestone, Michelin, Dunlop..."
-                               class="w-full px-4 py-2.5 bg-slate-950 border border-slate-700 rounded-xl text-white text-xs focus:ring-1 focus:ring-amber-500">
+                               class="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-slate-900 text-xs focus:ring-1 focus:ring-blue-500 focus:border-blue-500">
                         <datalist id="brandList">
                             @foreach($brands as $b)
                                 <option value="{{ $b }}"></option>
@@ -56,15 +56,15 @@
                     </div>
 
                     <div>
-                        <label class="block text-xs font-semibold text-slate-300 mb-1">Seri / Tipe Kembangan (Pattern) *</label>
+                        <label class="block text-xs font-semibold text-slate-700 mb-1">Seri / Tipe Kembangan (Pattern) *</label>
                         <input type="text" name="pattern" value="{{ old('pattern') }}" required
                                placeholder="Contoh: Ecopia EP150, Primacy 4..."
-                               class="w-full px-4 py-2.5 bg-slate-950 border border-slate-700 rounded-xl text-white text-xs focus:ring-1 focus:ring-amber-500">
+                               class="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-slate-900 text-xs focus:ring-1 focus:ring-blue-500 focus:border-blue-500">
                     </div>
 
                     <div>
-                        <label class="block text-xs font-semibold text-slate-300 mb-1">Kategori Ban</label>
-                        <select name="type" class="w-full px-3 py-2.5 bg-slate-950 border border-slate-700 rounded-xl text-white text-xs">
+                        <label class="block text-xs font-semibold text-slate-700 mb-1">Kategori Ban</label>
+                        <select name="type" class="w-full px-3 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-slate-900 text-xs">
                             <option value="Tubeless / Passenger Car">Tubeless / Passenger Car (Sedan/MPV/City Car)</option>
                             <option value="SUV / All-Terrain">SUV / All-Terrain (A/T, H/T, M/T)</option>
                             <option value="Commercial / Niaga Truk">Commercial / Niaga Truk Ringan (8PR/10PR)</option>
@@ -76,83 +76,83 @@
                 <!-- Dimensi Ukuran -->
                 <div class="grid grid-cols-1 sm:grid-cols-4 gap-4 mt-4">
                     <div>
-                        <label class="block text-xs font-semibold text-slate-300 mb-1">Lebar (Width mm)</label>
+                        <label class="block text-xs font-semibold text-slate-700 mb-1">Lebar (Width mm)</label>
                         <input type="number" name="width" x-model.number="width" @input="updateSizeAndSku()" placeholder="185"
-                               class="w-full px-4 py-2.5 bg-slate-950 border border-slate-700 rounded-xl text-white text-xs focus:ring-1 focus:ring-amber-500">
+                               class="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-slate-900 text-xs focus:ring-1 focus:ring-blue-500 focus:border-blue-500">
                     </div>
 
                     <div>
-                        <label class="block text-xs font-semibold text-slate-300 mb-1">Aspek Rasio (%)</label>
+                        <label class="block text-xs font-semibold text-slate-700 mb-1">Aspek Rasio (%)</label>
                         <input type="number" name="aspect_ratio" x-model.number="aspectRatio" @input="updateSizeAndSku()" placeholder="65"
-                               class="w-full px-4 py-2.5 bg-slate-950 border border-slate-700 rounded-xl text-white text-xs focus:ring-1 focus:ring-amber-500">
+                               class="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-slate-900 text-xs focus:ring-1 focus:ring-blue-500 focus:border-blue-500">
                     </div>
 
                     <div>
-                        <label class="block text-xs font-semibold text-slate-300 mb-1">Ukuran Ring (Rim ")</label>
+                        <label class="block text-xs font-semibold text-slate-700 mb-1">Ukuran Ring (Rim ")</label>
                         <input type="number" name="rim_size" x-model.number="rimSize" @input="updateSizeAndSku()" placeholder="15"
-                               class="w-full px-4 py-2.5 bg-slate-950 border border-slate-700 rounded-xl text-white text-xs focus:ring-1 focus:ring-amber-500">
+                               class="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-slate-900 text-xs focus:ring-1 focus:ring-blue-500 focus:border-blue-500">
                     </div>
 
                     <div>
-                        <label class="block text-xs font-semibold text-slate-300 mb-1">Format Tampilan Ukuran *</label>
+                        <label class="block text-xs font-semibold text-slate-700 mb-1">Format Tampilan Ukuran *</label>
                         <input type="text" name="size_display" x-model="sizeDisplay" required placeholder="185/65 R15"
-                               class="w-full px-4 py-2.5 bg-slate-950 border border-slate-700 rounded-xl text-white text-xs font-mono font-bold focus:ring-1 focus:ring-amber-500">
+                               class="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-slate-900 text-xs font-mono font-bold focus:ring-1 focus:ring-blue-500 focus:border-blue-500">
                     </div>
                 </div>
 
                 <!-- Kode DOT (PRD 4.3) -->
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4">
                     <div>
-                        <label class="block text-xs font-semibold text-slate-300 mb-1">Kode DOT Produksi (4 Digit)</label>
+                        <label class="block text-xs font-semibold text-slate-700 mb-1">Kode DOT Produksi (4 Digit)</label>
                         <input type="text" name="dot_code" x-model="dotCode" @input="updateDotYear()" maxlength="4" placeholder="Contoh: 3224 (Minggu 32 Thn 24)"
-                               class="w-full px-4 py-2.5 bg-slate-950 border border-slate-700 rounded-xl text-white text-xs font-mono focus:ring-1 focus:ring-amber-500">
-                        <span class="text-[10px] text-slate-400">2 digit pertama = minggu, 2 digit terakhir = tahun</span>
+                               class="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-slate-900 text-xs font-mono focus:ring-1 focus:ring-blue-500 focus:border-blue-500">
+                        <span class="text-[10px] text-slate-500">2 digit pertama = minggu, 2 digit terakhir = tahun</span>
                     </div>
 
                     <div>
-                        <label class="block text-xs font-semibold text-slate-300 mb-1">Tahun Produksi DOT</label>
+                        <label class="block text-xs font-semibold text-slate-700 mb-1">Tahun Produksi DOT</label>
                         <input type="number" name="dot_year" x-model.number="dotYear" placeholder="2024"
-                               class="w-full px-4 py-2.5 bg-slate-950 border border-slate-700 rounded-xl text-white text-xs font-mono focus:ring-1 focus:ring-amber-500">
-                        <span class="text-[10px] text-slate-400">Penting untuk deteksi dini dead stock / ban kadaluarsa</span>
+                               class="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-slate-900 text-xs font-mono focus:ring-1 focus:ring-blue-500 focus:border-blue-500">
+                        <span class="text-[10px] text-slate-500">Penting untuk deteksi dini dead stock / ban kadaluarsa</span>
                     </div>
                 </div>
             </div>
 
             <!-- Section 3: Harga & Stok Gudang -->
             <div>
-                <h2 class="text-xs font-bold text-slate-300 uppercase tracking-wider mb-4 border-b border-slate-800 pb-2">
+                <h2 class="text-xs font-bold text-slate-700 uppercase tracking-wider mb-4 border-b border-slate-200 pb-2">
                     3. Harga & Manajemen Stok Rak
                 </h2>
                 <div class="grid grid-cols-1 sm:grid-cols-4 gap-4">
                     <div>
-                        <label class="block text-xs font-semibold text-slate-300 mb-1">Harga Modal / HPP (Rp) *</label>
+                        <label class="block text-xs font-semibold text-slate-700 mb-1">Harga Modal / HPP (Rp) *</label>
                         <input type="number" name="cost_price" value="{{ old('cost_price', 0) }}" required min="0"
-                               class="w-full px-4 py-2.5 bg-slate-950 border border-slate-700 rounded-xl text-white text-xs font-bold focus:ring-1 focus:ring-amber-500">
+                               class="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-slate-900 text-xs font-bold focus:ring-1 focus:ring-blue-500 focus:border-blue-500">
                     </div>
 
                     <div>
-                        <label class="block text-xs font-semibold text-slate-300 mb-1">Harga Jual Toko (Rp) *</label>
+                        <label class="block text-xs font-semibold text-slate-700 mb-1">Harga Jual Toko (Rp) *</label>
                         <input type="number" name="selling_price" value="{{ old('selling_price', 0) }}" required min="0"
-                               class="w-full px-4 py-2.5 bg-slate-950 border border-slate-700 rounded-xl text-white text-xs font-bold focus:ring-1 focus:ring-amber-500">
+                               class="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-slate-900 text-xs font-bold focus:ring-1 focus:ring-blue-500 focus:border-blue-500">
                     </div>
 
                     <div>
-                        <label class="block text-xs font-semibold text-slate-300 mb-1">Jumlah Stok Awal *</label>
+                        <label class="block text-xs font-semibold text-slate-700 mb-1">Jumlah Stok Awal *</label>
                         <input type="number" name="stock" value="{{ old('stock', 0) }}" required min="0"
-                               class="w-full px-4 py-2.5 bg-slate-950 border border-slate-700 rounded-xl text-white text-xs font-bold focus:ring-1 focus:ring-amber-500">
+                               class="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-slate-900 text-xs font-bold focus:ring-1 focus:ring-blue-500 focus:border-blue-500">
                     </div>
 
                     <div>
-                        <label class="block text-xs font-semibold text-slate-300 mb-1">Batas Minimum Peringatan</label>
+                        <label class="block text-xs font-semibold text-slate-700 mb-1">Batas Minimum Peringatan</label>
                         <input type="number" name="min_stock" value="{{ old('min_stock', 5) }}" required min="1"
-                               class="w-full px-4 py-2.5 bg-slate-950 border border-slate-700 rounded-xl text-white text-xs focus:ring-1 focus:ring-amber-500">
+                               class="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-slate-900 text-xs focus:ring-1 focus:ring-blue-500 focus:border-blue-500">
                     </div>
                 </div>
 
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4">
                     <div>
-                        <label class="block text-xs font-semibold text-slate-300 mb-1">Lokasi Rak Gudang</label>
-                        <select name="rack_location_id" class="w-full px-3 py-2.5 bg-slate-950 border border-slate-700 rounded-xl text-white text-xs">
+                        <label class="block text-xs font-semibold text-slate-700 mb-1">Lokasi Rak Gudang</label>
+                        <select name="rack_location_id" class="w-full px-3 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-slate-900 text-xs">
                             <option value="">-- Pilih Lokasi Rak --</option>
                             @foreach($rackLocations as $rack)
                                 <option value="{{ $rack->id }}" {{ old('rack_location_id') == $rack->id ? 'selected' : '' }}>
@@ -163,18 +163,18 @@
                     </div>
 
                     <div>
-                        <label class="block text-xs font-semibold text-slate-300 mb-1">Catatan Tambahan (Mobil yang cocok)</label>
+                        <label class="block text-xs font-semibold text-slate-700 mb-1">Catatan Tambahan (Mobil yang cocok)</label>
                         <input type="text" name="notes" value="{{ old('notes') }}" placeholder="Contoh: Cocok untuk Toyota Avanza, Xenia, Mobilio"
-                               class="w-full px-4 py-2.5 bg-slate-950 border border-slate-700 rounded-xl text-white text-xs focus:ring-1 focus:ring-amber-500">
+                               class="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-slate-900 text-xs focus:ring-1 focus:ring-blue-500 focus:border-blue-500">
                     </div>
                 </div>
             </div>
 
-            <div class="flex items-center justify-end gap-3 pt-4 border-t border-slate-800">
-                <a href="{{ route('products.index') }}" class="px-5 py-3 rounded-2xl bg-slate-800 hover:bg-slate-700 text-white font-bold text-xs">
+            <div class="flex items-center justify-end gap-3 pt-4 border-t border-slate-200">
+                <a href="{{ route('products.index') }}" class="px-5 py-3 rounded-2xl bg-slate-50 hover:bg-slate-100 text-slate-700 border border-slate-200 font-bold text-xs">
                     Batal
                 </a>
-                <button type="submit" class="px-6 py-3 rounded-2xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-xs uppercase tracking-wider shadow-lg shadow-amber-500/20">
+                <button type="submit" class="px-6 py-3 rounded-2xl bg-blue-600 hover:bg-blue-700 text-white font-semibold shadow-xs text-xs uppercase tracking-wider shadow-lg shadow-blue-500/10">
                     Simpan Master Data Ban
                 </button>
             </div>
